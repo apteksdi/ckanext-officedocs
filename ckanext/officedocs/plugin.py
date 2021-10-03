@@ -22,11 +22,11 @@ class OfficeDocsPlugin(plugins.SingletonPlugin):
         }
 
     def setup_template_variables(self, context, data_dict):
-        from urllib import quote_plus
-        url = quote_plus(data_dict["resource"]["url"])
-        return {
-            "resource_url": url
-        }
+        	from requests.utils import requote_uri
+        	url = requote_uri(data_dict["resource"]["url"])
+        	return {
+            	"resource_url": url
+        	}
 
     def can_view(self, data_dict):
         supported_formats = [
